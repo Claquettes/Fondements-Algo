@@ -125,3 +125,27 @@ En soit, une fonction peut prendre en argument un pointeur sur une fonction pour
 * Le **Stack** (pile en francais mais péférez la notation anglaise) est une zone de la mémoire qui est allouée statiquement (on utilise des variables globales ou des variables locales pour allouer de la mémoire dans la pile)
 * Permets de stocker des données de taille fixe
 
+**Attention, la pile est limitée en taille, il faut donc faire attention à ne pas dépasser la taille de la pile, sinon on fait un stack overflow**
+
+## Pile / File
+
+* La pile est une structure de données qui fonctionne sur le principe du **LIFO** (Last In First Out), c'est à dire que le dernier élément ajouté est le premier élément à être retiré
+* La file est une structure de données qui fonctionne sur le principe du **FIFO** (First In First Out), c'est à dire que le premier élément ajouté est le premier élément à être retiré
+
+### La fonction gets
+
+La fonction gets permet de lire une chaine de caractères, elle prend en paramètre un pointeur sur un char et retourne un pointeur sur un char
+
+```char *gets(char *s);```
+
+**Attention, cette fonction est dépréciée, il faut utiliser fgets à la place, car elle peut supprimer des données**
+
+### Attaques: Meltdown et Spectre
+
+Meltdown et Spectre sont des attaques qui exploitent les failles de sécurité des processeurs. 
+
+### Out-of-order execution
+
+```x=a+b+c+d * e;```
+
+
