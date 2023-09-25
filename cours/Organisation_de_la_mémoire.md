@@ -148,4 +148,13 @@ Meltdown et Spectre sont des attaques qui exploitent les failles de sécurité d
 
 ```x=a+b+c+d * e;```
 
+## Malloc
+
+Imaginons qu'on veuille déclarer un tableau de taille 10; on peut utiliser malloc, et déclarer 10 blocks de taille sizeOf(int) dans le tas
+
+EXEMPLE : ```int *T = (int *) malloc(10 * sizeof(int));```
+
+int * est un type de retour valide pour une fonction, donc on peut faire ```int *f()``` et ```int *f(int a)```
+
+```int *p = (int *) malloc(10 * sizeof(int));```
 
