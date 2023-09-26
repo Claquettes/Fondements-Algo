@@ -10,6 +10,7 @@ typedef struct
     unsigned int nbLignes;
     unsigned int nbColonnes;
 } Matrix;
+
 Matrix newMatrix()
 {
     Matrix mat;
@@ -65,10 +66,78 @@ int get(Matrix *M, int i, int j)
     }
 }
 
+int Diag(Matrix *M)
+{
+    // on vérifie si le nombre de lignes est égal au nombre de colonnes, car une matrice diagonale doit être carrée
+    if (M->nbLignes != M->nbColonnes)
+    {
+        printf("Erreur : la matrice n'est pas carrée");
+        return 0;
+    }
+    else
+    {
+        // on parcourt la matrice
+        for (int i = 0; i < M->nbLignes; i++)
+        {
+            for (int j = 0; j < M->nbColonnes; j++)
+            {
+                // si on est sur la diagonale, on vérifie que la valeur est différente de 0
+                if (i == j && get(M, i, j) != 0)
+                {
+                    return 0;
+                }
+                else if (i != j && get(M, i, j) == 0)
+                {
+                    return 0;
+                }
+            }
+        }
+        return 1;
+    }
+}
+
+int Symmetric(Matrix *M)
+{
+    printf("BONJOUR SYMMETRIQUE OU PAS CHEF");
+    return 1;
+}
+
+void putValuesToMakeDiag(Matrix *M)
+{
+    for (int i = 0; i < M->nbLignes; i++)
+    {
+        for (int j = 0; j < M->nbColonnes; j++)
+        {
+            if (i == j)
+            {
+                set(M, i, j, 0);
+            }
+            else
+            {
+                set(M, i, j, 1);
+            }
+        }
+    }
+}
+
 int main()
 {
     Matrix leo = newMatrix();
-    set(&leo, 1, 2, 1);
+    putValuesToMakeDiag(&leo);
+
+    int isDiag = Diag(&leo);
+    printf("\n");
+    if (isDiag == 1)
+    {
+        printf("La matrice est diagonale");
+    }
+    else
+    {
+        printf("La matrice n'est pas diagonale");
+    }
+    printf("\n");
+    int isSym = Symmetric(&leo);
+    printf("\n");
     printf("%d", get(&leo, 1, 2));
     return 1;
 }
