@@ -98,8 +98,17 @@ int Diag(Matrix *M)
 
 int Symmetric(Matrix *M)
 {
-    printf("BONJOUR SYMMETRIQUE OU PAS CHEF");
-    return 1;
+    // une matrice est symétrique si m[i][j] = m[j][i]
+    for (int i = 0; i < M->nbLignes; i++)
+    {
+        for (int j = 0; j < M->nbColonnes; j++)
+        {
+            if (get(M, i, j) != get(M, j, i))
+            {
+                return 0;
+            }
+        }
+    }
 }
 
 void putValuesToMakeDiag(Matrix *M)
@@ -117,6 +126,86 @@ void putValuesToMakeDiag(Matrix *M)
                 set(M, i, j, 1);
             }
         }
+    }
+}
+
+void putValuesToMakeTriangSup(Matrix *M)
+{
+    for (int i = 0; i < M->nbLignes; i++)
+    {
+        for (int j = 0; j < M->nbColonnes; j++)
+        {
+            if (i > j)
+            {
+                set(M, i, j, 0);
+            }
+            else
+            {
+                set(M, i, j, 1);
+            }
+        }
+    }
+}
+
+void putValuesToMakeTriangInf(Matrix *M)
+{
+    for (int i = 0; i < M->nbLignes; i++)
+    {
+        for (int j = 0; j < M->nbColonnes; j++)
+        {
+            if (i < j)
+            {
+                set(M, i, j, 0);
+            }
+            else
+            {
+                set(M, i, j, 1);
+            }
+        }
+    }
+}
+
+int Lower(Matrix *M)
+{
+    for (int i = 0; i < M->nbLignes; i++)
+    {
+        for (int j = 0; j < M->nbColonnes; j++)
+        {
+            if (i < j && get(M, i, j) != 0)
+            {
+                return 0;
+            }
+        }
+    }
+    return 1;
+}
+
+int Upper(Matrix *M)
+{
+    for (int i = 0; i < M->nbLignes; i++)
+    {
+        for (int j = 0; j < M->nbColonnes; j++)
+        {
+            if (i > j && get(M, i, j) != 0)
+            {
+                return 0;
+            }
+        }
+    }
+    return 1;
+}
+
+int Triangle(Matrix *M)
+{
+    if (Lower(M) == 1 || Upper(M) == 1)
+    {
+        printf("La matrice est triangulaire");
+        return 1;
+    }
+    else
+    {
+        printf("La matrice n'est pas triangulaire");
+        return 0;
     }
 }
 
@@ -138,6 +227,11 @@ int main()
     printf("\n");
     int isSym = Symmetric(&leo);
     printf("\n");
-    printf("%d", get(&leo, 1, 2));
+
+    Matrix remondo = newMatrix();
+    putValuesToMakeTriangSup(&remondo);
+    Triangle(&remondo);
+    printf("\n");
+
     return 1;
 }
