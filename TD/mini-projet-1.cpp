@@ -84,14 +84,16 @@ int Diag(Matrix *M)
                 // si on est sur la diagonale, on vérifie que la valeur est différente de 0
                 if (i == j && get(M, i, j) != 0)
                 {
+                    printf("La matrice n'est pas diagonale");
                     return 0;
                 }
                 else if (i != j && get(M, i, j) == 0)
                 {
-                    return 0;
+                    printf("La matrice n'est pas diagonale");
                 }
             }
         }
+        printf("La matrice est diagonale");
         return 1;
     }
 }
@@ -105,10 +107,13 @@ int Symmetric(Matrix *M)
         {
             if (get(M, i, j) != get(M, j, i))
             {
+                printf("La matrice n'est pas symétrique");
                 return 0;
             }
         }
     }
+    printf("La matrice est symétrique");
+    return 1;
 }
 
 void putValuesToMakeDiag(Matrix *M)
@@ -213,21 +218,9 @@ int main()
 {
     Matrix leo = newMatrix();
     putValuesToMakeDiag(&leo);
-
-    int isDiag = Diag(&leo);
+    Diag(&leo);
     printf("\n");
-    if (isDiag == 1)
-    {
-        printf("La matrice est diagonale");
-    }
-    else
-    {
-        printf("La matrice n'est pas diagonale");
-    }
-    printf("\n");
-    int isSym = Symmetric(&leo);
-    printf("\n");
-
+    //
     Matrix remondo = newMatrix();
     putValuesToMakeTriangSup(&remondo);
     Triangle(&remondo);
